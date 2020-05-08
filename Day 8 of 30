@@ -1,0 +1,24 @@
+Question link- https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3323/
+
+Solution-
+
+bool checkStraightLine(vector<vector<int>>& coordinates) {
+        
+        int n = coordinates.size();
+        
+		// Base case: Two points are always collinear
+            if(n == 2) 
+            return true;
+        
+        coordinates.push_back(coordinates[0]);
+		// long int to prevent overflow
+        
+        long area = 0;
+        for(int i=0; i<n; i++) {
+         int x1 = coordinates[i][0], y1 = coordinates[i][1], x2 = coordinates[i+1][0], y2 = coordinates[i+1][1];
+            
+            area += x1*y2 - x2*y1;
+        }
+        
+        return (area == 0);
+    }
