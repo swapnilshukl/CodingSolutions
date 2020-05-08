@@ -2,6 +2,11 @@ Question link- https://leetcode.com/explore/featured/card/may-leetcoding-challen
 
 Solution-
 
+Approach 1 (Using cross product) :
+
+if(x1*y2-x2*y1)=0 which means points are collinear.
+
+
 bool checkStraightLine(vector<vector<int>>& coordinates) {
         
         int n = coordinates.size();
@@ -21,4 +26,22 @@ bool checkStraightLine(vector<vector<int>>& coordinates) {
         }
         
         return (area == 0);
+    }
+
+
+Approach 2 (Using Slope form)
+
+bool checkStraightLine(vector<vector<int>>& coordinates) {
+        
+        double slope = abs(double(coordinates[0][1] - coordinates[1][1]) / double(coordinates[0][0] - coordinates[1][0]));
+        
+        for (int i = 2; i < coordinates.size(); ++i) {
+            double other = abs(double(coordinates[0][1] - coordinates[i][1]) / double(coordinates[0][0] - coordinates[i][0]));
+            
+            if (other != slope) {
+                return false;
+            }
+        }
+        
+        return true;
     }
