@@ -1,0 +1,44 @@
+Day 7- Question Link- https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3322/
+
+Solution:
+
+int findHeight(TreeNode* curr, int &parent, int value, int height){
+        
+        if(!curr)
+            return 0;
+        
+        if(curr->val==value)
+            return height;
+        
+        parent=curr->val;
+        
+        int left = findHeight(curr->left,parent,value,height+1);
+        if(left)
+            return left;
+        
+        parent = curr->val;
+        
+        int right = findHeight(curr->right,parent,value,height+1);
+        return right;
+    }
+    
+    
+    bool isCousins(TreeNode* root, int x, int y) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        
+        if(root->val==x || root->val==y)
+            return false;
+        
+        int parent=-1;
+        int xHeight=findHeight(root,parent,x,0);
+        
+        int yParent=-1;
+        int yHeight=findHeight(root,yParent,y,0);
+        
+        if(parent!=yParent && xHeight==yHeight)
+            return true;
+        
+        return false;
+    }
