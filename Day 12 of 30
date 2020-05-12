@@ -1,0 +1,25 @@
+Question link- https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3327/
+
+Solution : Runtime: 16 ms, faster than 29.23% of C++ online submissions for Single Element in a Sorted Array.
+Memory Usage: 11.2 MB, less than 7.14% of C++ online submissions for Single Element in a Sorted Array.
+
+
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        
+       int x=nums[0];
+        for(int i=1;i<nums.size();i++){
+            x = x^nums[i];
+        }
+        return x;
+    
+    }
+};
+
+static auto speedup = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
