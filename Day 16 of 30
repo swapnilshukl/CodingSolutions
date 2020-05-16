@@ -1,0 +1,27 @@
+Question link- Odd Even Linked List
+
+Solution:
+
+ ListNode* oddEvenList(ListNode* head) {
+        
+        if(head == NULL or head->next == NULL){
+            return head;
+        }
+        ListNode *odd = head , *even = head->next;
+        ListNode  *s_o = odd , *s_e = even; 
+        
+        while(even!=NULL and even->next!=NULL){
+            odd->next = odd->next->next;
+            even->next = even->next->next;
+            odd = odd->next;
+            even = even->next;
+        }
+        odd->next = s_e;
+        // even->next = NULL;
+        
+        return s_o;
+    
+    }
+    
+    Time Complexity: O(N)
+    Space Complexity: O(1)
