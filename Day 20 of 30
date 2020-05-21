@@ -1,0 +1,31 @@
+Question  link- https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3335/
+
+Solution :
+
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
+        stack<TreeNode*> nodes;
+        TreeNode* top = root;
+        
+        int result = 0;
+        
+        while(!nodes.empty() || top){
+            while(top){
+                nodes.push(top);
+                top = top->left;
+            }
+            top = nodes.top();
+            nodes.pop();
+            if(!(--k)){
+                result = top->val; break;
+            }
+            top = top->right;
+        }
+        return result;
+    }
+};
