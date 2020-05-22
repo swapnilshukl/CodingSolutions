@@ -1,0 +1,22 @@
+Question link-https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3337/
+
+Solution:
+
+string frequencySort(string s) {
+ 
+ unordered_map<char,int>m;
+ for(auto i : s) m[i]++;
+ priority_queue<pair<int,char>>pq;
+ for(auto i: m) pq.push({i.second,i.first});
+ string ss;
+ int freq;
+ char ch;
+ 
+ while(!pq.empty()){
+            freq=pq.top().first;
+            ch=pq.top().second;
+            pq.pop();
+            ss+=string(freq,ch);
+        }
+        return ss;
+}
