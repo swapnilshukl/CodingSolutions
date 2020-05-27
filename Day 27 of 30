@@ -1,0 +1,95 @@
+Question link-https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3342/
+
+Solution:
+
+Approach-1 (BFS)
+
+class Solution {
+     unordered_map<int,vector<int>> graph;
+        vector<int>vis;
+        vector<int>col;
+        
+public:
+    
+     bool bfs(int u){
+         col[u]=1;
+         queue<int>q;
+         
+         q.push(u);
+         while(!q.empty()){
+             int i= q.front();
+             q.pop();
+             
+             for(auto v: graph[i]){
+                 if(col[v]==-1){
+                     col[v]=1-col[i];
+                     q.push(v);
+                 }
+                 else if(col[v]==col[i]) return false;
+             }
+         }
+         return true;
+     }
+    
+    
+    bool possibleBipartition(int N, vector<vector<int>>& dislikes) {
+      
+       for(auto d:dislikes){
+            graph[d[0]].push_back(d[1]);
+            graph[d[1]].push_back(d[0]);
+        }
+        col.resize(N+1,-1);
+        
+        for(int i=1;i<=N;i++){
+            if(col[i]==-1){
+                if(!bfs(i)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+};
+
+
+
+Approach-2 (DFS)
+
+class Solution {
+    unordered_map<int,vector<int> > gr;
+    vector<int> vis;
+    vector<int> colo;
+public:
+    bool dfs(int u){
+        vis[u]=1;
+        for(auto v:gr[u]){
+            if(!vis[v]){
+                colo[v]=1-colo[u];
+                if(!dfs(v)){
+                    return false;
+                }
+            }
+            else if(colo[v]==colo[u]){
+                return false;
+            }
+        }
+        return true;
+    }
+    bool possibleBipartition(int N, vector<vector<int>>& dislikes) {
+        for(auto d:dislikes){
+            gr[d[0]].push_back(d[1]);
+            gr[d[1]].push_back(d[0]);
+        }
+        colo.resize(N+1,-1);
+        vis.resize(N+1,0);
+        for(int i=1;i<=N;i++){
+            if(colo[i]==-1){
+                colo[i]=1;
+                if(!dfs(i)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+};
