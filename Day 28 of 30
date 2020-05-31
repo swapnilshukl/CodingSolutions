@@ -1,0 +1,10 @@
+Question link- https://leetcode.com/explore/featured/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3343/
+
+Solution:
+
+ vector<int> countBits(int num) {
+          vector<int> ret(num+1, 0);
+        for (int i = 1; i <= num; ++i)
+            ret[i] = ret[i&(i-1)] + 1;
+        return ret;
+    }
